@@ -1,0 +1,91 @@
+set linesize 300;
+set pagesize 300;
+select * from emp;
+
+----------------------
+
+select * from emp where (sal+comm) > 2000;
+select * from emp where (sal+comm) > 2000 or sal>2000;
+select * from emp where (sal+comm) > 2000 and sal>2000;
+
+-----------------------
+
+select * from emp where sal between 2500 and 3500 and comm is null and deptno = 30;
+
+-----------------------
+
+//confusing
+select * from emp where JOB='MANAGER' and (ENAME not like 'B%' and ENAME not like 'C%');
+select * from emp where JOB='MANAGER' and (ENAME not like 'b%' and ENAME not like 'c%');
+select * from emp where JOB='manager' and (ENAME not like 'b%' and ENAME not like 'c%');
+
+------------------------
+
+even
+select * from emp where (sal*12) like '%0';
+odd
+select * from emp where (sal/12) not like '%.%';
+even salary
+select * from emp where (sal/12) not like '%.%';
+
+select * from emp where hiredate like '%80';
+
+//THIS NOT WORK
+select * from emp where hiredate like '%FEB';
+select * from emp where job = 'SALESMAN' and ENAME like '%E____';
+select * from emp where JOB = 'SALESMAN' and ename like '____';
+select * from emp where JOB = 'SALESMAN' and sal like '____';
+//confuse
+select * from emp where JOB = 'SALESMAN' and ename like '%S______' and sal like '____';
+
+------------------------
+
+select upper('sqlcourse') , lower('SQLCOURSE') , initcap(ename) from emp;
+select upper(ename) , lower(ename) , initcap(ename) from emp;
+
+------------------------
+
+space also count
+
+select length('sqlcourse') from dual;
+select length('sql course') from dual;
+select length(ename) from dual;
+select length(ename) from emp;
+
+--------------------------------
+
+
+use this query repalace with like
+
+select * from emp where length(ename) = 5;
+select concat(6,2) from dual;
+select concat('sql','plus') from dual;
+select concat('sql',' ','plus') from emp; //error because two argument is accept but here three argument means two argument and one space
+
+-------------------------------
+
+select concat(ename , concat(' ' , 'plus')) from emp;
+select concat(initcap (ename),concat ( 'work as',concat ( lower(job) , concat ('and earns', concat(sal,'rs salary'))))) from emp;
+
+--------------------------------
+
+select ename , reverse(ename) from emp;
+
+--------------------------------
+
+select replace('java','a','b') from emp;
+select replace('java','a') from emp;
+select replace('a','a') from emp;
+select replace('j','a') from emp;
+select replace('java','a','#') from emp;
+select ename , replace(ename,'s','#') and replace(ename,'A','@') from emp;
+//confuse
+select ename ,replace(ename,'s','#'),'A','@' from emp;
+//confuse
+select replace (ename ,replace(ename,'s','#'),'A','@') from emp;
+
+-----------------------------------------------
+
+select  ename , deptno , replace(replace(replace(deptno,'10','30'),30,10),'#',30) from emp;
+select  ename , deptno , replace(replace(replace(deptno,10,30),30,10),'#',30) from emp;
+

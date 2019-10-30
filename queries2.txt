@@ -1,0 +1,46 @@
+select length(ename) from emp;
+ select * from emp where 12*SAL between 22000 and 45000; 
+select * from emp where ename like 'S%_' or length(ename) = 5;
+ select * from emp where ename like 'S%_' and length(ename) = 5;
+select * from emp where ename like 'S%_' and length(ename) = 4;
+
+select * from emp where length(ename) = 4 and ename like '__R%';
+
+select * from emp where ename like 'S%_%H'; 
+select * from emp where ename like 'S_%_%_H';  
+select * from emp where ename like 'S_%%_H';
+select * from emp where length(ename) = 5 and ename like 'S%H'; 
+
+select * from emp where to_char(hiredate,'mon') = 'JAN';
+select hiredate from emp where ename like '_A%';
+select * from emp where to_char(hiredate,'MON') like '_A_%'; 
+select * from emp where to_char(hiredate,’mon’) like ‘_A%’; 
+
+
+select * from emp where ename like '%LL%';
+select * from emp where to_char(hiredate,'yy') like '8%';
+select * from emp where to_char(hiredate,'yyyy') like '8%';
+
+A) select * from emp where deptno not in (20); (OR)
+B) select * from emp where deptno != 20; (OR)
+C) select * from emp where deptno <>20; (OR)
+D) select * from emp where deptno not like ‘20’; 
+
+
+select * from emp where job not in ('MANAGER','PRESIDENT') order by sal asc;
+A) select * from emp where to_char (hiredate,’MON’) not in (‘MAR’); (OR)
+B) select * from emp where to_char (hiredate,’MON’) != ‘MAR’; (OR)
+C) select * from emp where to_char(hiredate,’MONTH’) not like ‘MAR%’ ;
+(OR)
+D) select * from emp where to_char(hiredate,’MON’) <> ‘MAR’; 
+
+
+
+select loc from emp e , dept d where e.ename = 'SMITH' and e.deptno =
+d.deptno ; 
+
+
+ select * from emp where hiredate in (select min(hiredate) from
+emp where to_char( hiredate,’YYYY’) = ‘1981’); (OR) 
+B) select * from emp where hiredate = (select min(hiredate) from
+emp where to_char(hiredate,’YYYY’) = ‘1981’); 
