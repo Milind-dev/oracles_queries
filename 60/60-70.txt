@@ -1,0 +1,410 @@
+select ename from emp where job = 'MANAGER' and deptno in (20,30)
+select length(LOC)  - length(' ') from dept;
+select length(' ') from dept;
+
+65=?
+
+66 => ?
+
+select ename , comm from emp where job not in('MANAGER','ANALYST');
+select ename , sal from emp where length(sal)  = 1 or sal like '%0';
+select * from emp where job in ('MANAGER','CLERK') AND SAL > 1000;
+
+
+
+select ename from emp where lower(substr(ename , length(ename),1));
+select ename from emp where lower(substr(ename,length(ename),1)) = 'e';
+select ename ,sal from emp where lower(substr(ename , length(ename) , 1)) = 'e' and length(sal) = 4;
+
+select ename ,sal from emp where sal between 1000 and 3000 and deptno not in (10,20);
+
+ select ename , sal from emp where deptno  in (10,20,30) and job <> 'SALESMAN' AND sal between 1000 and 2000 ;
+
+select dname , loc from dept where loc like '%O';
+
+
+
+
+
+
+Query to get all those names of employees,who have 'A' as their middle character in their name
+SELECT ENAME
+FROM EMPLOYEES
+WHERE A IN
+(SELECT ENAME,
+       SUBSTR(ENAME,LENGTH(ENAME)/2+1,1)
+FROM EMPLOYEES)
+;
+
+ELECT ENAME
+FROM EMPLOYEES
+WHERE ((LEN(ENAME) %2) = 1
+AND SUBSTRING(ENAME, LEN(Ename)/2+1, 1) = 'A')
+OR
+((LEN(ENAME) %2) = 0
+AND SUBSTRING(ENAME, LEN(ENAME)/2-1, 2) LIKE '%A%')
+
+
+
+
+
+
+=================
+
+
+
+SQL*Plus: Release 10.2.0.3.0 - Production on Wed Nov 14 21:36:03 2018
+
+Copyright (c) 1982, 2006, Oracle.  All Rights Reserved.
+
+Enter password: ******
+
+Connected to:
+Oracle Database 10g Enterprise Edition Release 10.2.0.3.0 - Production
+With the Partitioning, OLAP and Data Mining options
+
+SQL> 
+SQL> set pagesize 300;
+SQL> set linesize 300;
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+
+14 rows selected.
+
+SQL> select 
+  2  * from dept;
+
+    DEPTNO DNAME          LOC
+---------- -------------- -------------
+        10 ACCOUNTING     NEW YORK
+        20 RESEARCH       DALLAS
+        30 SALES          CHICAGO
+        40 OPERATIONS     BOSTON
+
+SQL> select * from emp where sal and sal like '%0';
+select * from emp where sal and sal like '%0'
+                            *
+ERROR at line 1:
+ORA-00920: invalid relational operator
+
+
+SQL> select ename , sal from emp where length(sal)  = 1 and sal like '%1';
+
+no rows selected
+
+SQL> select ename , sal from emp where length(sal)  = 1 and sal like '%0';
+
+no rows selected
+
+SQL> select ename , sal from emp where length(sal)  = 1 or sal like '%0';
+
+ENAME             SAL
+---------- ----------
+SMITH             800
+ALLEN            1600
+WARD             1250
+MARTIN           1250
+BLAKE            2850
+CLARK            2450
+SCOTT            3000
+KING             5000
+TURNER           1500
+ADAMS            1100
+JAMES             950
+FORD             3000
+MILLER           1300
+
+13 rows selected.
+
+SQL> select * from emp where job in ('MANAGER','CLERK') AND SAL > 1000;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+
+SQL> ELECT ENAME
+SP2-0734: unknown command beginning "ELECT ENAM..." - rest of line ignored.
+SQL> FROM EMPLOYEES
+SP2-0734: unknown command beginning "FROM EMPLO..." - rest of line ignored.
+SQL> WHERE ((LEN(ENAME) %2) = 1
+SP2-0734: unknown command beginning "WHERE ((LE..." - rest of line ignored.
+SQL> AND SUBSTRING(ENAME, LEN(Ename)/2+1, 1) = 'A')
+SP2-0734: unknown command beginning "AND SUBSTR..." - rest of line ignored.
+SP2-0044: For a list of known commands enter HELP
+and to leave enter EXIT.
+SQL> OR
+SP2-0042: unknown command "OR" - rest of line ignored.
+SQL> ((LEN(ENAME) %2) = 0
+  2  AND SUBSTRING(ENAME, LEN(ENAME)/2-1, 2) LIKE '%A%')
+  3  ;
+((LEN(ENAME) %2) = 0
+  *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword
+
+
+SQL> clear
+SQL> select ename from emp where where lower(substr(ename,length(ename),)) = 'a';
+select ename from emp where where lower(substr(ename,length(ename),)) = 'a'
+                            *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select ename from emp where lower(substr(ename,length(ename),)) = 'a'
+  2  ;
+select ename from emp where lower(substr(ename,length(ename),)) = 'a'
+                                                             *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL>  select ename from emp where lower(substr(ename,length(ename),1)) = 'a';
+
+no rows selected
+
+SQL>  select ename from emp where lower(substr(ename,length(ename),)) = 'a'
+  2  ;
+ select ename from emp where lower(substr(ename,length(ename),)) = 'a'
+                                                              *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL>   select ename from emp where lower(substr(ename,length(ename),1)) = 's';
+
+ENAME
+----------
+JONES
+ADAMS
+JAMES
+
+SQL>   select ename from emp where lower(substr(ename,length(ename),-1)) = 's';
+
+no rows selected
+
+SQL> select ename from emp where lower(substr(ename,length(ename),-1)) = 'a';
+
+no rows selected
+
+SQL> select ename from emp where lower(substr(ename,1,length(ename)) = 'a';
+select ename from emp where lower(substr(ename,1,length(ename)) = 'a'
+                                                                *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL>  select ename from emp where lower(substr(ename,1,length(ename)) = 'a';
+ select ename from emp where lower(substr(ename,1,length(ename)) = 'a'
+                                                                 *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL>  select ename from emp where lower(substr(ename,1,length(ename))  = 's';
+ select ename from emp where lower(substr(ename,1,length(ename))  = 's'
+                                                                  *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> 
+SQL> select ename from emp where substr(ename,-1)='S';
+
+ENAME
+----------
+JONES
+ADAMS
+JAMES
+
+SQL> select ename from emp where lower(substr(ename,length(ename),1) = 'E';
+select ename from emp where lower(substr(ename,length(ename),1) = 'E'
+                                                                *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> select ename from emp where lower(substr(ename,length(ename),1)) = 'E';
+
+no rows selected
+
+SQL> select ename from emp where lower(substr(ename,length(ename),1)) = 'e';
+
+ENAME
+----------
+BLAKE
+
+SQL>  select ename ,sal from emp where lower(substr(ename , length(ename) , 1 ) ) = 'e' having lengt
+h(Sal) > 4;
+ select ename ,sal from emp where lower(substr(ename , length(ename) , 1 ) ) = 'e' having length(Sal
+                                                                                                 *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression
+
+
+SQL>  select ename ,sal from emp where lower(substr(ename , length(ename) , 1 ) ) = 'e' and length(s
+al) > 4;
+
+no rows selected
+
+SQL>  select ename ,sal from emp where lower(substr(ename , length(ename) , 1 ) ) = 'e' and length(s
+al) < 4;
+
+no rows selected
+
+SQL>  select ename ,sal from emp where lower(substr(ename , length(ename) , 1)) = 'e' and length(sal
+) = 4;
+
+ENAME             SAL
+---------- ----------
+BLAKE            2850
+
+SQL> select ename , sal from emp sal between 1000 and 3000 and dept <> (10,20);
+select ename , sal from emp sal between 1000 and 3000 and dept <> (10,20)
+                                *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select ename ,sal from emp where sal between 1000 and 3000 and dept <> (10,20);
+select ename ,sal from emp where sal between 1000 and 3000 and dept <> (10,20)
+                                                                    *
+ERROR at line 1:
+ORA-01797: this operator must be followed by ANY or ALL
+
+
+SQL>  select ename ,sal from emp where sal between 1000 and 3000 and dept not in (10,20);
+ select ename ,sal from emp where sal between 1000 and 3000 and dept not in (10,20)
+                                                                *
+ERROR at line 1:
+ORA-00904: "DEPT": invalid identifier
+
+
+SQL>   select ename ,sal from emp where sal between 1000 and 3000 and deptno not in (10,20);
+
+ENAME             SAL
+---------- ----------
+ALLEN            1600
+WARD             1250
+MARTIN           1250
+BLAKE            2850
+TURNER           1500
+
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+
+14 rows selected.
+
+SQL> select ename , sal from emp where dept in (10,20,30) and job <> 'SALESMAN' AND sal between 1000
+ and 2000;
+select ename , sal from emp where dept in (10,20,30) and job <> 'SALESMAN' AND sal between 1000 and 
+                                  *
+ERROR at line 1:
+ORA-00904: "DEPT": invalid identifier
+
+
+SQL> select ename , sal from emp where deptno  in (10,20,30) and job <> 'SALESMAN' AND sal between 1
+000 and 2000 ;
+
+ENAME             SAL
+---------- ----------
+ADAMS            1100
+MILLER           1300
+
+SQL> select * from dept;
+
+    DEPTNO DNAME          LOC
+---------- -------------- -------------
+        10 ACCOUNTING     NEW YORK
+        20 RESEARCH       DALLAS
+        30 SALES          CHICAGO
+        40 OPERATIONS     BOSTON
+
+SQL> select dname from dept where loc like '%o'
+  2  ;
+
+no rows selected
+
+SQL> select dname from dept where loc like '%O';
+
+DNAME
+--------------
+SALES
+
+SQL> select dname , loc from where loc like '%O';
+select dname , loc from where loc like '%O'
+                        *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> select dname , loc from dept where loc like '%O';
+
+DNAME          LOC
+-------------- -------------
+SALES          CHICAGO
+
+SQL> dfa
+SP2-0042: unknown command "dfa" - rest of line ignored.
+SQL> sas
+SP2-0042: unknown command "sas" - rest of line ignored.
+SQL> fa
+SP2-0042: unknown command "fa" - rest of line ignored.
+SQL> sf
+SP2-0042: unknown command "sf" - rest of line ignored.
+SP2-0044: For a list of known commands enter HELP
+and to leave enter EXIT.
+SQL> asf
+SP2-0042: unknown command "asf" - rest of line ignored.
+SQL> as
+SP2-0042: unknown command "as" - rest of line ignored.
+SQL> fas
+SP2-0042: unknown command "fas" - rest of line ignored.
+SQL> 
+SQL> as
+SP2-0042: unknown command "as" - rest of line ignored.
+SP2-0044: For a list of known commands enter HELP
+and to leave enter EXIT.
+SQL> f
+SP2-0042: unknown command "f" - rest of line ignored.
+SQL> as
+SP2-0042: unknown command "as" - rest of line ignored.
+SQL> fas
+SP2-0042: unknown command "fas" - rest of line ignored.
+SQL> 
