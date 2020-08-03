@@ -9,3 +9,10 @@ SELECT SYSDATE,LAST_DAY (SYSDATE) "Last",LAST_DAY (SYSDATE) - SYSDATE "Days left
 SELECT ROUND ( (MONTHS_BETWEEN ('01-Feb-2014', '01-Mar-2012') * 30), 0)num_of_daysFROM DUAL;</p>
 <p>OR</p>
 <p>SELECT TRUNC(sysdate) - TRUNC(e.hire_date) FROM employees;
+
+
+SELECT ADD_MONTHS (TRUNC (SYSDATE, 'MONTH'), i) start_date,TRUNC (LAST_DAY (ADD_MONTHS (SYSDATE, i))) end_dateFROM XMLTABLE ('for $i in 0 to xs:int(D) return $i'PASSING XMLELEMENT (d,FLOOR (MONTHS_BETWEEN (ADD_MONTHS (TRUNC (SYSDATE, 'YEAR') - 1, 12),SYSDATE)))COLUMNS i INTEGER PATH '.');
+SELECT (SYSDATE - TRUNC (SYSDATE)) * 24 * 60 * 60 num_of_sec_since_morningFROM DUAL;
+SELECT (TRUNC (SYSDATE+1) - SYSDATE) * 24 * 60 * 60 num_of_sec_leftFROM DUAL;
+SELECT table_nameFROM user_tablesWHERE table_name = 'TABLE_NAME';
+SELECT column_name AS FOUNDFROM user_tab_colsWHERE table_name = 'TABLE_NAME' AND column_name = 'COLUMN_NAME';
