@@ -2,3 +2,10 @@ SELECT TRUNC (SYSDATE, 'MONTH') "First day of current month"FROM DUAL;
 SELECT TRUNC (LAST_DAY (SYSDATE)) "Last day of current month"FROM DUAL;
 SELECT TRUNC (SYSDATE, 'YEAR') "Year First Day" FROM DUAL;
 SELECT TRUNC (SYSDATE, 'YEAR') "Year First Day" FROM DUAL;
+SELECT ADD_MONTHS (TRUNC (SYSDATE, 'YEAR'), 12) - 1 "Year Last Day" FROM DUAL
+SELECT CAST (TO_CHAR (LAST_DAY (SYSDATE), 'dd') AS INT) number_of_daysFROM DUAL;
+SELECT SYSDATE,LAST_DAY (SYSDATE) "Last",LAST_DAY (SYSDATE) - SYSDATE "Days left"FROM DUAL;
+
+SELECT ROUND ( (MONTHS_BETWEEN ('01-Feb-2014', '01-Mar-2012') * 30), 0)num_of_daysFROM DUAL;</p>
+<p>OR</p>
+<p>SELECT TRUNC(sysdate) - TRUNC(e.hire_date) FROM employees;
