@@ -1,0 +1,2 @@
+SELECT TRUNC (SYSDATE, 'MONTH') "First day of current month"FROM DUAL;
+SELECT TRUNC (LAST_DAY (SYSDATE)) "Last day of current month"FROM DUAL;
